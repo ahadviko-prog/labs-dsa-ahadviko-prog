@@ -37,7 +37,9 @@ namespace dsa {
         void pop_back();
 
         // Part B (lab / homework)
-        void insert(std::size_t index, const T& value);
+        void insert(std::size_t index, const T& value) {
+            // TODO INSERT
+        }
         void erase(std::size_t index);
 
         void reserve(std::size_t newCapacity);
