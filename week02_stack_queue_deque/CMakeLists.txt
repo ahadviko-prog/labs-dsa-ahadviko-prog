@@ -7,7 +7,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # INTERFACE library: header-only data structures (no compiled code), used to share include paths across targets
-add_library(dsa_week02 INTERFACE)
+add_library(dsa_week02 INTERFACE
+        include/dsa/DynamicArray.hpp)
 target_include_directories(dsa_week02 INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(week02 main.cpp)
