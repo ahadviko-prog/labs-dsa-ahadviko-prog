@@ -1,7 +1,3 @@
-//
-// Created by marius on 2/19/26.
-//
-
 #pragma once
 #include <cstddef>
 
@@ -12,27 +8,72 @@ namespace dsa {
         std::size_t swaps = 0;
     };
 
-    // Sorts array a[0..n-1] in non-decreasing order.
-    // Returns operation counts (comparisons + swaps).
+    // Bubble Sort
     template <class T>
     SortStats bubble_sort(T* a, std::size_t n) {
         SortStats st;
-        // TODO: implement bubble sort
-        // Count:
-        // - st.comparisons++ every time you compare two elements
-        // - st.swaps++ every time you swap two elements
-        (void)a; (void)n;
+
+        if (n < 2) {
+            return st;
+        }
+
+        for (std::size_t i = 0; i < n - 1; ++i) {
+            bool swapped = false;
+
+            for (std::size_t j = 0; j < n - 1 - i; ++j) {
+                ++st.comparisons;
+
+                if (a[j] > a[j + 1]) {
+                    T temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+
+                    ++st.swaps;
+                    swapped = true;
+                }
+            }
+
+            if (!swapped) {
+                break;
+            }
+        }
+
         return st;
     }
 
-    // Shell sort using gap sequence: n/2, n/4, ..., 1
+    // Shell Sort using gaps n/2, n/4, ..., 1
     template <class T>
     SortStats shell_sort(T* a, std::size_t n) {
         SortStats st;
-        // TODO: implement shell sort
-        // Count comparisons when you compare elements in the inner loop.
-        // Count swaps when you perform a swap OR when you do a move-based swap.
-        (void)a; (void)n;
+
+        for (std::size_t gap = n / 2; gap > 0; gap /= 2) {
+
+            for (std::size_t i = gap; i < n; ++i) {
+
+                T temp = a[i];
+                std::size_t j = i;
+                bool moved = false;
+
+                while (j >= gap) {
+                    ++st.comparisons;
+
+                    if (a[j - gap] > temp) {
+                        a[j] = a[j - gap];
+                        ++st.swaps;      // count shift
+                        j -= gap;
+                        moved = true;
+                    } else {
+                        break;
+                    }
+                }
+
+                if (moved) {
+                    a[j] = temp;
+                    ++st.swaps;          // count placement only if moved
+                }
+            }
+        }
+
         return st;
     }
 
