@@ -5,7 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_library(dsa_week09 INTERFACE)
+add_library(dsa_week09 INTERFACE
+        include/dsa/DynamicArray.hpp)
 target_include_directories(dsa_week09 INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(week09 main.cpp)
