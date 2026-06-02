@@ -1,8 +1,5 @@
-//
-// Created by marius on 2/19/26.
-//
-
 #pragma once
+
 #include <cstddef>
 #include <stdexcept>
 #include <utility>
@@ -10,14 +7,18 @@
 
 namespace dsa {
 
-    // Max-Heap (priority queue)
     template <class T>
     class Heap {
     public:
         Heap() = default;
 
-        bool empty() const { return data_.size() == 0; }
-        std::size_t size() const { return data_.size(); }
+        bool empty() const {
+            return data_.size() == 0;
+        }
+
+        std::size_t size() const {
+            return data_.size();
+        }
 
         const T& top() const {
             if (empty())
