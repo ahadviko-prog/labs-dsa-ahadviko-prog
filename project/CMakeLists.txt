@@ -1,15 +1,28 @@
-cmake_minimum_required(VERSION 3.16)
-project(project LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.15)
+project(AlgorithmPlayground CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_library(dsa INTERFACE)
-target_include_directories(dsa INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+# Inform CMake about your header directories
+include_directories(include)
 
-add_executable(project main.cpp)
-target_link_libraries(project PRIVATE dsa)
+# Define the custom header files so CLion recognizes them in the project targets
+set(DSA_HEADERS
+        include/doctest.h
+        include/dsa/DynamicArray.hpp
+        include/dsa/Stack.hpp
+        include/dsa/Queue.hpp
+        include/dsa/LinkedList.hpp
+        include/dsa/BST.hpp
+)
 
-add_executable(project_tests tests.cpp)
-target_link_libraries(project_tests PRIVATE dsa)
+# 1. Target for Interactive Menu App
+add_executable(project_run main.cpp ${DSA_HEADERS}
+        include/dsa/Stack.hpp
+        include/dsa/Queue.hpp
+        include/dsa/LinkedList.hpp
+        include/dsa/BST.hpp)
+
+# 2. Target for Automated Unit Tests
+add_executable(project_tests tests.cpp ${DSA_HEADERS})
